@@ -1,0 +1,193 @@
+﻿<Window x:Class="Learn.Styles.Windows.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Learn.Styles.Windows"
+        WindowStyle="None"
+        UseLayoutRounding="True"
+        ResizeMode="NoResize"
+        mc:Ignorable="d"
+        Title="SettingsWindow" Height="450" Width="800">
+    <Grid x:Name="winGrid" Background="Black">
+        <Grid Margin="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="37.5"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Background="{StaticResource HeaderBrush}" MouseDown="Border_MouseDown">
+                <Label x:Name="pageName" Content="Settings Menu" VerticalAlignment="Center" FontFamily="Segoe UI Semibold" FontSize="20" Margin="5,0,0,0" Foreground="{StaticResource TextBrush}"/>
+            </Border>
+            <Button Grid.Row="0" x:Name="closeBtn" Height="31" VerticalAlignment="Top" HorizontalAlignment="Right" Background="{x:Null}" Click="closeBtn_Click" BorderBrush="#FF707070" MouseEnter="closeBtn_MouseEnter" MouseLeave="closeBtn_MouseLeave">
+                <Image x:Name="closeBtnI" RenderTransformOrigin="0.5,0.5" >
+                    <Image.Style>
+                        <Style TargetType="{x:Type Image}">
+                            <Setter Property="Source" Value="{StaticResource Close_Base}"/>
+                            <Setter Property="RenderOptions.EdgeMode" Value="Aliased"/>
+                        </Style>
+                    </Image.Style>
+                </Image>
+            </Button>
+            <Grid Grid.Row="1" Margin="0,5,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="1" Background="{StaticResource BodyBrush}" CornerRadius="2" RenderTransformOrigin="0.5,0.5" Width="2" Margin="0,5,0,5"/>
+                <StackPanel x:Name="settingsTabs" Orientation="Vertical" Background="Transparent" Margin="10">
+
+                    <Button x:Name="defaultsBtn" Margin="10,5,10,5" Height="40" Style="{StaticResource importBtn}">
+                        <TextBlock Text="Defaults" FontSize="18" FontFamily="Segoe UI Variable Small" />
+                    </Button>
+
+                    <Button x:Name="interfaceBtn" Margin="10,5,10,5" Height="40" Style="{StaticResource importBtn}">
+                        <TextBlock Text="Themes" FontSize="18" FontFamily="Segoe UI Variable Small" />
+                    </Button>
+
+                </StackPanel>
+
+                <DockPanel x:Name="DefaultsSettingsDP" Grid.Column="2" Grid.Row="1" Visibility="Visible">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height ="*"/>
+                            <RowDefinition Height ="30"/>
+                        </Grid.RowDefinitions>
+                        <Button Grid.Row="1" Content="Apply" Style="{StaticResource importBtn}" VerticalAlignment="Center" HorizontalAlignment="Right" Width="80" Height="22" Margin="0,0,5,0" Click="applyBtn_Click" Grid.Column="1"/>
+
+                        <ScrollViewer Grid.Row="0">
+                            <StackPanel Orientation="Vertical">
+
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="38.833"/>
+                                        <RowDefinition Height="1.167"/>
+                                        <RowDefinition Height="25"/>
+                                        <RowDefinition Height="25"/>
+                                    </Grid.RowDefinitions>
+                                    <!--Row 0-->
+                                    <Label Content="App Defaults" Margin="2,0,-6,0" FontFamily="Segoe UI Variable Display Semibold" VerticalAlignment="Center" FontSize="16"/>
+                                    <Border Margin="107,0,10,0" Height="2" Background="{StaticResource BodyBrush}" CornerRadius="2" VerticalAlignment="Center"/>
+                                    <!--Row 1-->
+                                    <CheckBox x:Name="customExitbtnCB" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="11,0,0,0" VerticalContentAlignment="Center" Checked="exitOptionCheckBox_Checked"/>
+                                    <Label Content="Enable Custom Exit Button" HorizontalAlignment="Left" Margin="25,0,0,0" VerticalAlignment="Center" FontSize="12" FontFamily="Segoe UI Semilight" Grid.Row="2"/>
+
+                                    <!--Row 2-->
+
+                                </Grid>
+
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="40"/>
+                                        <RowDefinition Height="25"/>
+                                        <RowDefinition Height="25"/>
+                                        <RowDefinition Height="25"/>
+                                    </Grid.RowDefinitions>
+                                    <!--Row 0-->
+                                    <Label Grid.Row="0" Content="Main Window Defaults" Margin="2,-2,-6,0" FontFamily="Segoe UI Variable Display Semibold" VerticalAlignment="Center" FontSize="16"/>
+                                    <Border Grid.Row="0" Margin="180,0,10,0" Height="2" Background="{StaticResource BodyBrush}" CornerRadius="2" VerticalAlignment="Center"/>
+                                    <!--Row 1-->
+                                    <Label Grid.Row="1" Content="# of Best Terms to Show:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" FontSize="12" FontFamily="Segoe UI Semilight"/>
+                                    <TextBox x:Name="numBT_TB" Grid.Row="1" Style ="{StaticResource TxtBox}" Margin="160,3,0,3" Width="20" HorizontalAlignment="Left"/>
+                                    <!--Row 2-->
+                                    <Label Grid.Row="2" Content="# of Worst Terms to Show:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" FontSize="12" FontFamily="Segoe UI Semilight"/>
+                                    <TextBox x:Name="numWT_TB" Grid.Row="2" Style ="{StaticResource TxtBox}" Margin="160,3,0,3" Width="20" HorizontalAlignment="Left"/>
+                                </Grid>
+
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="40"/>
+                                        <RowDefinition Height="25"/>
+                                        <RowDefinition Height="25"/>
+                                        <RowDefinition Height="25"/>
+
+                                    </Grid.RowDefinitions>
+                                    <!--Row 0-->
+                                    <Label Grid.Row="0" Content="Import Defaults" Margin="2,-2,-6,0" FontFamily="Segoe UI Variable Display Semibold" VerticalAlignment="Center" FontSize="16"/>
+                                    <Border Grid.Row="0" Margin="130,0,10,0" Height="2" Background="{StaticResource BodyBrush}" CornerRadius="2" VerticalAlignment="Center"/>
+                                    <!--Row 1-->
+                                    <Label Grid.Row="1" Content="Term Seperator:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" FontSize="12" FontFamily="Segoe UI Semilight"/>
+                                    <TextBox x:Name="termSepDefaultTB" Grid.Row="1" Style ="{StaticResource TxtBox}" Margin="105,3,0,3" Width="20" HorizontalAlignment="Left"/>
+                                    <!--Row 2-->
+                                    <Label Grid.Row="2" Content="Row Seperator:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" FontSize="12" FontFamily="Segoe UI Semilight"/>
+                                    <TextBox x:Name="rowSepDefaultTB" Grid.Row="2" Style ="{StaticResource TxtBox}" Margin="105,3,0,3" Width="20" HorizontalAlignment="Left"/>
+                                </Grid>
+
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="40"/>
+                                        <RowDefinition Height="25"/>
+                                        <RowDefinition Height="26"/>
+                                        <RowDefinition Height="25"/>
+                                        <RowDefinition Height="25"/>
+
+                                    </Grid.RowDefinitions>
+                                    <!--Row 0-->
+                                    <Label Grid.Row="0" Content="Quick Learn Defaults" Margin="2,-2,-6,0" FontFamily="Segoe UI Variable Display Semibold" VerticalAlignment="Center" FontSize="16"/>
+                                    <Border Margin="169,0,10,0" Height="2" Background="{StaticResource BodyBrush}" CornerRadius="2" VerticalAlignment="Center"/>
+                                    <!--Row 1-->
+                                    <Label Grid.Row="1" Content="Wait Interval (seconds):" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" FontSize="12" FontFamily="Segoe UI Semilight"/>
+                                    <TextBox x:Name="waitIntervalTB" Grid.Row="1" Style ="{StaticResource TxtBox}" Margin="145,3,0,3" Width="20" HorizontalAlignment="Left"/>
+
+                                    <!--Row 2-->
+                                    <Label Grid.Row="2" Content="Terms per group:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" FontSize="12" FontFamily="Segoe UI Semilight"/>
+                                    <TextBox x:Name="termsPerGroupTB" Grid.Row="2" Style ="{StaticResource TxtBox}" Margin="145,3,0,3" Width="20" HorizontalAlignment="Left" />
+
+
+                                    <!--Row 3-->
+                                    <Label Grid.Row="3" Content="Max MCQ attempts:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" FontSize="12" FontFamily="Segoe UI Semilight"/>
+                                    <TextBox x:Name="maxMCQattempsTB" Grid.Row="3" Style ="{StaticResource TxtBox}" Margin="145,3,0,3" Width="20" HorizontalAlignment="Left"/>
+                                </Grid>
+
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="40"/>
+                                        <RowDefinition Height="25"/>
+                                        <RowDefinition Height="26"/>
+                                        <RowDefinition Height="25"/>
+                                        <RowDefinition Height="25"/>
+                                    </Grid.RowDefinitions>
+                                    <!--Row 0-->
+                                    <Label Grid.Row="0" Content="Matching Cards Defaults" Margin="2,-2,-6,0" FontFamily="Segoe UI Variable Display Semibold" VerticalAlignment="Center" FontSize="16"/>
+                                    <Border Margin="199,0,10,0" Height="2" Background="{StaticResource BodyBrush}" CornerRadius="2" VerticalAlignment="Center"/>
+                                    <!--Row 1-->
+                                    <Label Grid.Row="1" Content="Num" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" FontSize="12" FontFamily="Segoe UI Semilight"/>
+                                    <TextBox  Grid.Row="1" Style ="{StaticResource TxtBox}" Margin="105,3,0,3" Width="20" HorizontalAlignment="Left"/>
+                                    <!--Row 2-->
+                                    <Label Grid.Row="2" Content="Terms in a group" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" FontSize="12" FontFamily="Segoe UI Semilight"/>
+                                    <TextBox Grid.Row="2" Style ="{StaticResource TxtBox}" Margin="105,3,0,3" Width="20" HorizontalAlignment="Left"/>
+                                </Grid>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Grid>
+                </DockPanel>
+
+                <DockPanel x:Name="ThemeSettingsDP" Grid.Column="2" Grid.Row="1" Visibility="Hidden">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="30"/>
+                        </Grid.RowDefinitions>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="26"/>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="25"/>
+                            </Grid.RowDefinitions>
+                            <!--Row 0-->
+                            <Label Grid.Row="0" Content="Main Colors" Margin="2,-2,-6,0" FontFamily="Segoe UI Variable Display Semibold" VerticalAlignment="Center" FontSize="16"/>
+                            <Border Margin="108,0,10,0" Height="2" Background="{StaticResource BodyBrush}" CornerRadius="2" VerticalAlignment="Center"/>
+                            <!--Row 1-->
+                            <Label Grid.Row="1" Content="Primary Color" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" FontFamily="Segoe UI Semilight" Margin="10,0,0,0"/>
+
+                        </Grid>
+                        <Button Grid.Row="6" Content="Apply" Style="{StaticResource importBtn}" VerticalAlignment="Center" HorizontalAlignment="Right" Width="80" Height="22" Margin="0,0,5,0" Click="applyBtn_Click" Grid.Column="1"/>
+                    </Grid>
+                </DockPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+
+</Window>

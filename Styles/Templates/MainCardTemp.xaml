@@ -1,0 +1,26 @@
+﻿<UserControl x:Class="Learn.Styles.Templates.MainCardTemp"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Learn.Styles.Templates"
+             mc:Ignorable="d" 
+             MinHeight="300" MinWidth="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Label x:Name="stateLB" Grid.Row="0" Content="" Panel.ZIndex="1" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{StaticResource WhiteBrush}" HorizontalAlignment="Left" Margin="10,5,0,195" IsHitTestVisible="False" VerticalAlignment="Top" FontFamily="Segoe UI Variable Display Semibold" />
+        <TextBlock x:Name="mainLB" Grid.Row="0" Grid.RowSpan="2" Text="" TextWrapping="WrapWithOverflow" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Transparent" Foreground="{StaticResource WhiteBrush}" Panel.ZIndex="1" IsHitTestVisible="False" />
+        <Label x:Name="cardLB" Grid.Row="1" Content="" Panel.ZIndex="1" FontSize="14" HorizontalContentAlignment="Right" Foreground="{StaticResource WhiteBrush}" FontFamily="Segoe UI Variable Display Semibold" HorizontalAlignment="Right" Margin="0,0,10,0" IsHitTestVisible="False" />
+        <Button Grid.RowSpan="2" Style="{StaticResource MainCardBtn}" Click="mainCardBtn_Click" >
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+    </Grid>
+    
+</UserControl>

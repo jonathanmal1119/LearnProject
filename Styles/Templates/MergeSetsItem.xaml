@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="Learn.Styles.Templates.MergeSetsItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Learn.Styles.Templates"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="250" MaxHeight="50">
+    <Border CornerRadius="10" Background="{StaticResource HeaderBrush}" Margin="0,5,0,0" >
+        <Grid x:Name="border" Background="Transparent">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <CheckBox x:Name="checkBox" Content="" HorizontalAlignment="Left" VerticalAlignment="Center" Height="17" Margin="7,5,0,5" FontSize="10" IsChecked="False" Width="auto" Checked="checkBox_Checked" Unchecked="checkBox_UnChecked"/>
+            <Label x:Name="setSize" HorizontalAlignment="Right" VerticalAlignment="Center" Content="164 Terms" FontSize="10" Margin="0,0,5,0"/>
+        </Grid>
+    </Border>
+</UserControl>

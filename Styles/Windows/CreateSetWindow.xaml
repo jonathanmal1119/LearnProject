@@ -1,0 +1,121 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Learn.Styles.Windows"
+        xmlns:Templates="clr-namespace:Learn.Styles.Templates" x:Class="Learn.Styles.Windows.CreateSetWindow"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        UseLayoutRounding="True"
+        ResizeMode="NoResize" 
+        AllowsTransparency="True"
+        Title="CreateSetWindow" Width="800" Height="550">
+    <Grid x:Name="winGrid" Background="Black">
+        <Grid Margin="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="37.5"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Background="{StaticResource HeaderBrush}" MouseDown="Border_MouseDown">
+                <Label x:Name="pageName" Content="Create New Study Set" VerticalAlignment="Center" FontFamily="Segoe UI Semibold" FontSize="20" Margin="5,0,0,0" Foreground="{StaticResource TextBrush}"/>
+            </Border>
+            <Button Grid.Row="0" x:Name="closeBtn" Height="31" VerticalAlignment="Top" HorizontalAlignment="Right" Background="{x:Null}" Click="closeBtn_Click" BorderBrush="#FF707070" MouseEnter="closeBtn_MouseEnter" MouseLeave="closeBtn_MouseLeave" >
+                <Image x:Name="closeBtnI" RenderTransformOrigin="0.5,0.5" >
+                    <Image.Style>
+                        <Style TargetType="{x:Type Image}">
+                            <Setter Property="Source" Value="{StaticResource Close_Base}"/>
+                            <Setter Property="RenderOptions.EdgeMode" Value="Aliased"/>
+                        </Style>
+                    </Image.Style>
+                </Image>
+            </Button>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="35"/>
+                </Grid.RowDefinitions>
+                <!--Row 0-->
+                <Border Grid.Row="0" Margin="10,0,10,0" Height="1" Background="{DynamicResource CtrlHoverBrush}"/>
+                <!--Row 1-->
+                <Label Grid.Row="1" Content="Study Set Name:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" FontSize="14" FontFamily="Segoe UI Semilight"/>
+                <TextBox x:Name="StudySetTB" Grid.Row="1" Style ="{StaticResource TxtBox}" Margin="125,2,20,2" Height="25" TextChanged="StudySetTB_TextChanged"/>
+                <!--Row 2-->
+                <Label Grid.Row="2" Content="Description:" HorizontalAlignment="Left" Margin="37.5,0,0,0" VerticalAlignment="Top" FontSize="14" FontFamily="Segoe UI Semilight"/>
+                <TextBox x:Name="DescTB" Grid.Row="2" Style ="{StaticResource TxtBox}" Margin="125,5,20,5"/>
+                <!--Row 3-->
+                <Label Grid.Row="3" Content="Import Options:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalContentAlignment="Top" FontSize="14" FontFamily="Segoe UI Semilight"/>
+                <Button Grid.Row="3" Content="Importer" Style="{StaticResource importBtn}" VerticalAlignment="Center" HorizontalAlignment="Left" Width="80" Height="22" Margin="125,0,10,0" Click="importBtn_Click" Grid.Column="1"/>
+                <Button Grid.Row="3" Content="Merger" Style="{StaticResource importBtn}" VerticalAlignment="Center" HorizontalAlignment="Left" Width="80" Height="22" Margin="210,0,10,0" Click="mergerBtn_Click" Grid.Column="1"/>
+
+                <!--Row 4-->
+                <Border Grid.Row="4" Margin="10,0,10,0" Height="1" Background="{DynamicResource CtrlHoverBrush}"/>
+                
+                <!--Row 5-->
+                <ScrollViewer Grid.Row="5" Margin="100,10,100,0" BorderThickness="1,1,1,1" BorderBrush="{StaticResource DarkerWindowBrush}">
+                    <StackPanel x:Name="AddCardList"/>
+                </ScrollViewer>
+                <Border Grid.Row="5" Background="{StaticResource BodyBrush}" CornerRadius="2" RenderTransformOrigin="0.5,0.5" Width="2" Margin="0,4,100,4" HorizontalAlignment="Right"/>
+                <Border Grid.Row="5" Background="{StaticResource BodyBrush}" CornerRadius="2" RenderTransformOrigin="0.5,0.5" Width="2" Margin="95,4,0,4" HorizontalAlignment="Left"/>
+                <Border Grid.Row="5" Background="{StaticResource BodyBrush}" CornerRadius="2" RenderTransformOrigin="0.5,0.5" Width="2" Margin="0,4,114,4" HorizontalAlignment="Right"/>
+
+                <Button Grid.Row="5" Width="20" Height="20" Margin="0,10,75,0" HorizontalAlignment="Right" VerticalAlignment="Top" MouseEnter="addCardBtn_MouseEnter" MouseLeave="addCardBtn_MouseLeave" Click="addCardBtn_Click">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                    <Button.Style>
+                        <StaticResource ResourceKey="SideCardBtn"/>
+                    </Button.Style>
+                    <Image x:Name="addCardBtnI" Source="{StaticResource plusIcon}" Margin="5"/>
+                </Button>
+
+                <!--<Button Grid.Row="5" Width="20" Height="20" Margin="0,35,75,0" HorizontalAlignment="Right" VerticalAlignment="Top" MouseEnter="addCardBtn_MouseEnter" MouseLeave="addCardBtn_MouseLeave" Click="addCardBtn_Click">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="15"/>
+                        </Style>
+                    </Button.Resources>
+                    <Button.Style>
+                        <StaticResource ResourceKey="SideCardBtn"/>
+                    </Button.Style>
+                    <Image x:Name="addCardBtnImport" Source="{StaticResource importIcon}" Height="15" Width="14"/>
+                </Button>-->
+
+                <!--Bottom Row-->
+                <Button Grid.Row="7" Content="Create" Style="{StaticResource importBtn}" VerticalAlignment="Center" HorizontalAlignment="Right" Width="80" Height="22" Margin="0,0,10,0" Click="createBtn_Click" Grid.Column="1"/>
+
+                <Border Grid.Row="7" Background="{StaticResource HeaderBrush}" Margin="90,5,100,5" CornerRadius="10">
+                    <Grid Background="Transparent">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="42.5"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <!--Row 0-->
+                        <Label x:Name="setNameLB" Grid.Column="0" Content="" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                        <!--Row 1-->
+                        <Border Grid.Column="1" Background="{StaticResource BodyBrush}" CornerRadius="2" RenderTransformOrigin="0.5,0.5" Width="2" Margin="0,4,0,4"/>
+                        <!--Row 2-->
+                        <Label x:Name="numOfCardsLB" Grid.Column="2" Content="0" VerticalAlignment="Center" Width="25" HorizontalAlignment="Left" Margin="0,0,0,0" FontSize="14"/>
+                        <Image Source="{StaticResource cardsIcon}" Grid.Column="2" HorizontalAlignment="Right" Margin="0,5,0,5"/>
+                        <!--Row 3-->
+                        <Border Grid.Column="3" Background="{StaticResource BodyBrush}" CornerRadius="2" RenderTransformOrigin="0.5,0.5" Width="2" Margin="0,4,0,4"/>
+                        <!--Row 4-->
+                        <Label x:Name="errorLB" Grid.Column="4" Content="" VerticalAlignment="Center" Width="246" HorizontalAlignment="Right"/>
+                        
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

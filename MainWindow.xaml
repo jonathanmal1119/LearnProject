@@ -1,0 +1,316 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Learn"
+        xmlns:Styles="clr-namespace:Learn.Styles" xmlns:Templates="clr-namespace:Learn.Styles.Templates" x:Class="Learn.MainWindow"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        UseLayoutRounding="True" 
+        AllowsTransparency="True"
+        ResizeMode="CanResizeWithGrip"
+        Title="Learn" Width="1150" Height="700" MinWidth="1150" MinHeight="700" MaxHeight="1000" MaxWidth="1500">
+    <Grid x:Name="winBorder" Background="{StaticResource WindowBrush}">
+        <Grid Margin="1,1,1,1" Grid.RowSpan="2">
+            <DockPanel>
+                <Grid x:Name="namePanel" DockPanel.Dock="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="85"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="44"/>
+                        <ColumnDefinition Width="44"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <!--Header-->
+                    <Border Grid.Column="1" Grid.ColumnSpan="4" Background="{StaticResource HeaderBrush}" MouseDown="Border_MouseDown">
+                        <Label x:Name="pageName" Content="Dashboard" VerticalAlignment="Center" FontFamily="Segoe UI Semibold" FontSize="36" Margin="5,0,0,0" Foreground="{StaticResource TextBrush}"/>
+                    </Border>
+
+                    <!--SideBar DP-->
+                    <DockPanel x:Name="sideBarPanel" Grid.RowSpan="2" Background="{StaticResource SideBarBrush}" LastChildFill="False" >
+                        <Button x:Name="HomeSBB" DockPanel.Dock="Top" Style="{DynamicResource SideBarBtn}" Width="60" Height="60" Margin="5,100,5,5" MouseEnter="HomeSBB_MouseEnter" MouseLeave="HomeSBB_MouseLeave" Click="HomeBtn_Click" >
+                            <Button.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="7"/>
+                                </Style>
+                            </Button.Resources>
+                            <Image x:Name="HomeSBI" Source="{StaticResource homeIcon}" Margin="10"/>
+                        </Button>
+
+                        <Border DockPanel.Dock="Top" Height="7.5" Background="Transparent"/>
+
+                        <Button x:Name="StudySBB" DockPanel.Dock="Top" Style="{DynamicResource SideBarBtn}" Width="60" Height="60" Margin="5,0,5,5" MouseEnter="StudySBB_MouseEnter" MouseLeave="StudySBB_MouseLeave" Click="StudyBtn_Click">
+                            <Button.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="7"/>
+                                </Style>
+                            </Button.Resources>
+                            <Image x:Name="StudySBI" Source="{StaticResource folderIcon}" Margin="10"/>
+                        </Button>
+
+                        <Border DockPanel.Dock="Top" Height="7.5" Background="Transparent"/>
+
+                        <Button x:Name="DelSBB" DockPanel.Dock="Top" Style="{DynamicResource SideBarBtn}" Width="60" Height="60" Margin="5,0,5,5" MouseEnter="DelSBB_MouseEnter" MouseLeave="DelSBB_MouseLeave">
+                            <Button.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="7"/>
+                                </Style>
+                            </Button.Resources>
+                            <Image x:Name="DelSBI" Source="{StaticResource trashIcon}" Margin="10"/>
+                        </Button>
+
+                        <Button x:Name="SettingSBB" DockPanel.Dock="Bottom" Style="{DynamicResource SideBarBtn}" Width="60" Height="60" Margin="5,5,5,10" Click="settingsBtn_Click" MouseEnter="SettingSBB_MouseEnter" MouseLeave="SettingSBB_MouseLeave">
+                            <Button.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="7"/>
+                                </Style>
+                            </Button.Resources>
+                            <Image x:Name="SettingSBI" Source="{StaticResource settingsIcon}" Margin="10"/>
+                        </Button>
+
+
+                    </DockPanel>
+
+                    <DockPanel x:Name="CreateCardGrid" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" Margin="10,15,10,15" Visibility="Hidden">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height=".6*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <DockPanel x:Name="setItems" Grid.Row="1" Grid.RowSpan="2"/>
+                        </Grid>
+                    </DockPanel>
+                    <!--Home DP-->
+                    <DockPanel x:Name="HomeGrid" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" Margin="10,15,10,15" Panel.ZIndex="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height=".6*" MaxHeight="250"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="40"/>
+                                    <RowDefinition Height="126*"/>
+                                    <RowDefinition Height="40"/>
+                                </Grid.RowDefinitions>
+                                <!--Row 0-->
+                                <Label Grid.Row="0" Content="Your Recent Sets" Margin="2,-2,-6,0" FontFamily="Segoe UI Variable Display Semibold" VerticalAlignment="Top" FontSize="22"/>
+                                <Button Grid.Row="0" Margin="185,10,0,10"  HorizontalAlignment="Left" Click="refreshBtn_Click" Foreground="red" MouseEnter="refreshBtn_MouseEnter" MouseLeave="refreshBtn_MouseLeave">
+                                    <Image x:Name="refreshBtnI" Source="{StaticResource refreshIcon}"/>
+                                </Button>
+                                <Border Grid.Row="0" Margin="235,19,80,19" Height="2" Background="{StaticResource PrimaryBrush}" CornerRadius="2"/>
+                                <Button Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource createBtn}" Margin="0,8,0,8" Width="70" MouseEnter="AddBtn_MouseEnter" MouseLeave="AddBtn_MouseLeave" Click="AddBtn_Click" >
+                                    <Image x:Name="AddBtnI" Source="{StaticResource plusIcon}" VerticalAlignment="Center" Width="100" RenderTransformOrigin="0.5,0.5" Margin="4"/>
+                                </Button>
+
+                                <!--Row 1-->
+                                <UniformGrid x:Name="RecentSetsSP" Grid.Row ="1" Columns="5">
+
+                                </UniformGrid>
+                                <!--Row 2-->
+                                <Border Grid.Row="2" Margin="10,10,10,10" Height="2" Background="{StaticResource PrimaryBrush}"/>
+
+                            </Grid>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width=".5*"/>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width=".5*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="40"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" Content="Best Studied Terms" Margin="2,-2,-6,0" FontFamily="Segoe UI Variable Display Semibold" VerticalAlignment="Top" FontSize="22"/>
+                                    <Button Grid.Row="0" Style="{StaticResource importBtn}" HorizontalAlignment="Right" Width="30" Height="30" Margin="50,0,0,0" Click="bestTermsFilter_Click" MouseWheel="bestTermsFilter_MouseWheel">
+                                        <Button.Resources>
+                                            <Style TargetType="{x:Type Border}">
+                                                <Setter Property="CornerRadius" Value="15"/>
+                                            </Style>
+                                        </Button.Resources>
+                                        <TextBlock x:Name="bestTermsFilterByNumTB" Text="5" Foreground="{StaticResource WhiteBrush}" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Button>
+
+                                    <ScrollViewer Grid.Row="1">
+                                        <StackPanel x:Name="bestTermsSP" Orientation="Vertical"/>
+                                    </ScrollViewer>
+                                </Grid>
+                                <Border Grid.Column="1" Grid.Row="1" Background="{StaticResource PrimaryBrush}" CornerRadius="2" RenderTransformOrigin="0.5,0.5" Width="3"/>
+                                <Grid Grid.Column="2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="40"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" Content="Worst Studied Terms" Margin="2,-2,-6,0" FontFamily="Segoe UI Variable Display Semibold" VerticalAlignment="Top" FontSize="22"/>
+                                    <Button Grid.Row="0" Style="{StaticResource importBtn}" HorizontalAlignment="Right" Width="30" Height="30" Margin="50,0,0,0" Click="worstTermsFilter_Click" MouseWheel="worstTermsFilter_MouseWheel">
+                                        <Button.Resources>
+                                            <Style TargetType="{x:Type Border}">
+                                                <Setter Property="CornerRadius" Value="15"/>
+                                            </Style>
+                                        </Button.Resources>
+                                        <TextBlock x:Name="worstTermsFilterByNumTB" Text="5" Foreground="{StaticResource WhiteBrush}" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Button>
+
+                                    <ScrollViewer Grid.Row="1">
+                                        <StackPanel x:Name="worstTermsSP" Orientation="Vertical"/>
+                                    </ScrollViewer>
+                                </Grid>
+
+                            </Grid>
+
+                        </Grid>
+                    </DockPanel>
+                    <!--View Set DP-->
+                    <DockPanel x:Name="ViewSetDP" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" Margin="10,15,10,15" Visibility="Visible">
+                        <Grid x:Name ="ViewSetGrid">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height=".75*"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height=".5*"/>
+                            </Grid.RowDefinitions>
+                            <DockPanel x:Name="set2Items" Grid.Row="1" Grid.RowSpan="2"/>
+                            <DockPanel HorizontalAlignment="Right" Width="150" VerticalAlignment="Center">
+
+                                <Button DockPanel.Dock="Top" Margin="5" Style="{StaticResource SideCardBtn}" Click="flashcardsBtn_Click">
+                                    <Button.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="17.5"/>
+                                        </Style>
+                                    </Button.Resources>
+                                    <Label Content="Flashcards" Foreground="{StaticResource WhiteBrush}" FontSize="14" Margin="0,5,0,5"/>
+                                </Button>
+
+                                <Button DockPanel.Dock="Top" Margin="5" Style="{StaticResource SideCardBtn}" Click="quicklearnBtn_Click">
+                                    <Button.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="17.5"/>
+                                        </Style>
+                                    </Button.Resources>
+                                    <Label Content="Quick Learn" Foreground="{StaticResource WhiteBrush}" FontSize="14" Margin="0,5,0,5"/>
+                                </Button>
+
+                                <Button DockPanel.Dock="Top" Margin="5" Style="{StaticResource SideCardBtn}" Click="matchCardsBtn_Click">
+                                    <Button.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="17.5"/>
+                                        </Style>
+                                    </Button.Resources>
+                                    <Label Content="Card Matching" Foreground="{StaticResource WhiteBrush}" FontSize="14" Margin="0,5,0,5"/>
+                                </Button>
+
+                            </DockPanel>
+
+                            <ScrollViewer Grid.Row="2" Margin="100,10,100,0">
+                                <StackPanel x:Name="CardList"/>
+                            </ScrollViewer>
+
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="250,30,260,40">
+                                <Button Style="{StaticResource ArrowBtn}" Width="30" Height="30">
+                                    <Button.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="15"/>
+                                        </Style>
+                                    </Button.Resources>
+                                    <Image Source="{StaticResource editIconAlt}" Margin="5"/>
+                                </Button>
+                                
+                                <Button Style="{StaticResource ArrowBtn}" Width="30" Height="30" Margin="0,5,0,0" Click="exportBtn_Click">
+                                    <Button.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="15"/>
+                                        </Style>
+                                    </Button.Resources>
+                                    <Image Source="{StaticResource exportIcon}" Margin="5"/>
+                                </Button>
+                            </StackPanel>
+
+                            <!--<Templates:MainCardTemp x:Name="MainCard" HorizontalAlignment="Center" VerticalAlignment="Center" Height="300" Width="400"/>-->
+                            <Button Grid.Row="1" Style="{StaticResource ArrowBtn}" HorizontalAlignment="Center" Width="30" Height="30" Margin="50,0,0,0" Click="rightarrowClick">
+                                <Button.Resources>
+                                    <Style TargetType="{x:Type Border}">
+                                        <Setter Property="CornerRadius" Value="15"/>
+                                    </Style>
+                                </Button.Resources>
+                                <Image Source="{StaticResource rightarrowIcon}" Margin="5"/>
+                            </Button>
+                            <Button Grid.Row="1" Style="{StaticResource ArrowBtn}" HorizontalAlignment="Center" Width="30" Height="30" Margin="0,0,50,0" Click="leftArrowClick" >
+                                <Button.Resources>
+                                    <Style TargetType="{x:Type Border}">
+                                        <Setter Property="CornerRadius" Value="15"/>
+                                    </Style>
+                                </Button.Resources>
+                                <Image Source="{StaticResource leftarrowIcon}" Margin="5"/>
+                            </Button>
+                        </Grid>
+
+                    </DockPanel>
+                    <!--Quick Learn DP-->
+                    <DockPanel x:Name="QuicklearnDP" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" Margin="10,15,10,15" Visibility="Hidden">
+                        <Border CornerRadius="25" Background="{StaticResource HeaderBrush}" Margin="75,35,75,35">
+                            <Grid Background="Transparent">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height=".7*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock x:Name="termStatusTB" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="{StaticResource BodyBrush}" FontFamily="Segoe UI Variable Display Semibold" FontSize="20" Margin="0,10,15,0" />
+                                <TextBlock x:Name="MCQ_Term" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" TextWrapping="WrapWithOverflow" Foreground="{StaticResource WhiteBrush}"/>
+                                <Border x:Name="QL_FeedbackBar" Grid.Row="1" Margin="100,10,100,10" Height="4" Background="{StaticResource SideBarBrush}"/>
+                                <Button Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Height="25" Margin="0,0,10,0" Background="{StaticResource DarkCtrlPressBrush}" Click="logBtnClick">
+                                    <Button.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="10"/>
+                                        </Style>
+                                    </Button.Resources>
+                                </Button>
+                                    <Grid x:Name="MCQ_grid" Grid.Row="2" Background="Transparent" Margin="150,10,150,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </DockPanel>
+                    <!--Icon-->
+                    <Image x:Name="menuIcon" RenderSize="1,1" Source="{StaticResource deployIcon}" Width="45" Height="45"/>
+
+
+                    <!--Control Button-->
+                    <Button Grid.Column="2" x:Name="minimizeBtn" Height="31" VerticalAlignment="Top" Background="{x:Null}" Click="minimizeBtn_Click" MouseEnter="minimizeBtn_MouseEnter" MouseLeave="minimizeBtn_MouseLeave">
+                        <Image x:Name="minimizeBtnI">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}">
+                                    <Setter Property="Source" Value="{StaticResource Minus_Base}"/>
+                                    <Setter Property="RenderOptions.EdgeMode" Value="Aliased"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </Button>
+                    <Button Grid.Column="4" x:Name="closeBtn" Height="31" VerticalAlignment="Top" Background="{x:Null}" Click="closeBtn_Click" BorderBrush="#FF707070" MouseEnter="closeBtn_MouseEnter" MouseLeave="closeBtn_MouseLeave"  >
+                        <Image x:Name="closeBtnI" RenderTransformOrigin="0.5,0.5" >
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}">
+                                    <Setter Property="Source" Value="{StaticResource Close_Base}"/>
+                                    <Setter Property="RenderOptions.EdgeMode" Value="Aliased"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </Button>
+
+                </Grid>
+            </DockPanel>
+        </Grid>
+    </Grid>
+</Window>
+
+
